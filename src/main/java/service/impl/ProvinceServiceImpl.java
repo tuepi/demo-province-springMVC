@@ -3,6 +3,7 @@ package service.impl;
 import model.Province;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import repository.ProvinceRepository;
 import service.ProvinceService;
@@ -16,7 +17,7 @@ public class ProvinceServiceImpl implements ProvinceService {
     ProvinceRepository provinceRepository;
 
     @Override
-    public List<Province> findAll() {
+    public Iterable<Province> findAll() {
         return provinceRepository.findAll();
     }
 
@@ -33,5 +34,10 @@ public class ProvinceServiceImpl implements ProvinceService {
     @Override
     public void remove(Long id) {
         provinceRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Province> findAll(Pageable pageable) {
+        return provinceRepository.findAll(pageable);
     }
 }

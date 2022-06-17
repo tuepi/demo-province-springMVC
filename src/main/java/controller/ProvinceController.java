@@ -2,6 +2,9 @@ package controller;
 
 import model.Province;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +23,9 @@ public class ProvinceController {
     ProvinceService provinceService;
 
     @GetMapping
-    public ModelAndView showList() {
+    public ModelAndView showList(@PageableDefault(value = 2) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("/province/list");
-        Iterable<Province> provinces = provinceService.findAll();
+        Page<Province> provinces = provinceService.findAll(pageable);
         modelAndView.addObject("provinces", provinces);
         return modelAndView;
     }
