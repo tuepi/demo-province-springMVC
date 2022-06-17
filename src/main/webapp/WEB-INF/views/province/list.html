@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/provinces/create">Add new province</a>
+<div th:each="pro : ${provinces}">
+    <span th:text="${pro.getName()}"></span>
+    <span th:text="${pro.getDescription()}"></span>
+    <a th:href="@{/provinces/edit/__${pro.id}__}">Edit</a>
+    <a th:href="@{/provinces/delete/__${pro.id}__}">Delete</a>
+</div>
+</body>
+</html>
+</html>
